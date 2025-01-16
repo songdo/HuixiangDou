@@ -558,12 +558,15 @@ def llm_serve(config_path: str, server_ready: Value):
                     allow_origins=['*'],
                     allow_credentials=True,
                     allow_methods=['*'],
-                    allow_headers=['*'])
+                    allow_headers=['*']
+                    )
     router = APIRouter()
     router.add_api_route('/inference', inference, methods=['POST'])
     router.add_api_route('/stream', stream, methods=['POST'])
     app.include_router(router)
-    uvicorn.run(app, host='0.0.0.0', port=bind_port, log_level='info')
+    # uvicorn.run(app, host="::", port=8000)  # 想要监听 ipv6 就写成
+    uvicorn.run(app, host=None, port=bind_port, log_level='info') # 监听双栈写成
+    # uvicorn.run(app, host='0.0.0.0', port=bind_port, log_level='info')
 
 
 def start_llm_server(config_path: str):

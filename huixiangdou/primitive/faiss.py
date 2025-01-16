@@ -170,7 +170,7 @@ class Faiss():
                         raise ValueError(f'Unimplement chunk type: {chunk.modal}')
                 except Exception as e:
                     logger.error('{}'.format(e))
-
+                
                 if np_feature is None:
                     logger.error('np_feature is None')
                     continue

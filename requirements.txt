@@ -2,7 +2,7 @@ aiohttp
 beautifulsoup4
 duckduckgo_search
 einops
-faiss-gpu
+
 loguru
 lxml_html_clean
 networkx>=3.0

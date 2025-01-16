@@ -107,7 +107,7 @@ async def predict(text:str, image:str):
     global main_args
     global serial_assistant
     global paralle_assistant
-
+    
     with open('query.txt', 'a') as f:
         f.write(json.dumps({'data': text, 'date': ymd()}, ensure_ascii=False))
         f.write('\n')
@@ -246,7 +246,15 @@ if __name__ == '__main__':
         with gr.Row():
             result = gr.Markdown('>Text reply or inner status callback here, depends on `pipeline type`', label='Reply', show_label=True, header_links=True, line_breaks=True, show_copy_button=True)
             # result = gr.TextArea(label='Reply', show_copy_button=True, placeholder='Text Reply or inner status callback, depends on `pipeline type`')
-
+        with open('a.txt', 'w') as f:
+            f.write('{}{}'.format(input_question, input_image))
         run_button.click(predict, [input_question, input_image], [result])
+    
+    # app = gr.mount_gradio_app(app, demo.queue(), "/") # 如果需要连同后端 API 可将 FastAPI 的实例方法绑定给 gradio
+
     demo.queue()
-    demo.launch(share=False, server_name='0.0.0.0', debug=True)
+    # demo.launch(share=False, server_name='[::]', debug=True)
+    demo.launch(server_name="[::]", share=True, debug=True, root_path="/pws42501p7860t1729956791ermluygke")
+    # demo.launch(server_name="[::]", server_port=80, share=True, debug=True)
+
+    
